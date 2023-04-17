@@ -78,7 +78,7 @@ function SignUp() {
       password: Yup.string()
         .min(8, "password should be at least 8 characters long.")
         .matches(
-          "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))",
+          '((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))',
           "needed one (upperCase,lowercase,symbol)"
         )
         .required("Required*"),
@@ -91,7 +91,7 @@ function SignUp() {
         .required("Required*"),
       email: Yup.string()
         .email("invalid email id")
-        .matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
+        .matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$","Invalid emailId")
         .required("Required*"),
     }),
   });

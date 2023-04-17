@@ -42,6 +42,7 @@ function AddProducts() {
   const [url, setUrl] = useState(intialImage);
   const [categoryError, setCategoryError] = useState("");
   const [imageError, setImageError] = useState("");
+  const [showAddButton, setShowAddButton] = useState(false);
 
   const formikAddProduct = useFormik({
     initialValues: {
@@ -62,6 +63,7 @@ function AddProducts() {
       }
       if (url === intialImage) {
         setImageError("Upload product image");
+        setShowAddButton(false);
       } else {
         setImageError("");
       }
@@ -89,11 +91,15 @@ function AddProducts() {
   });
 
   const handleImageChange = (e) => {
+    setShowAddButton(true);
+    setImageError("");
     if (e.target.files[0] !== "") {
       setImage(e.target.files[0]);
     }
   };
   const handlesubmit = () => {
+    setShowAddButton(false);
+
     const imageRef = ref(storage, "image" + v4());
     console.log(imageRef);
     uploadBytes(imageRef, image)
@@ -201,12 +207,14 @@ function AddProducts() {
               onChange={handleImageChange}
             />
             {imageError && <p className="m-error">{imageError}</p>}
-            <button
-              className="add-product-submit-button"
-              onClick={handlesubmit}
-            >
-              Add Image
-            </button>
+            {showAddButton && (
+              <button
+                className="add-product-submit-button"
+                onClick={handlesubmit}
+              >
+                Add Image
+              </button>
+            )}
           </div>
         </div>
       </div>
